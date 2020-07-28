@@ -84,7 +84,7 @@ def extract_grid(npart=npart,nx=nx,ny=ny,nz=nz,order=order):
     #grid=np.reshape(grid,(8,nx,nz,ny,3))
     grid=np.reshape(grid,(8,ny,nz,nx,3),order='F')
     
-    n=f'/home/cfd/anaconda3/lib/python3.7/site-packages/pyfr/quadrules/hex/gauss-legendre-n{(order+1)**3}-d{2*(order+1)-1}-spu.txt'
+    n=f'PyFR/pyfr/quadrules/hex/gauss-legendre-n{(order+1)**3}-d{2*(order+1)-1}-spu.txt'
     f=open(n, 'r')
     k=f.read()
     k=k.replace("\n", " ")
