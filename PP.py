@@ -84,7 +84,7 @@ def extract_grid(npart=npart,nx=nx,ny=ny,nz=nz,order=order):
     #grid=np.reshape(grid,(8,nx,nz,ny,3))
     grid=np.reshape(grid,(8,ny,nz,nx,3),order='F')
     
-    n=f'/home/cfd/anaconda3/lib/python3.7/site-packages/pyfr/quadrules/hex/gauss-legendre-n{(order+1)**3}-d{2*(order+1)-1}-spu.txt'
+    n=f'PyFR/pyfr/quadrules/hex/gauss-legendre-n{(order+1)**3}-d{2*(order+1)-1}-spu.txt'
     f=open(n, 'r')
     k=f.read()
     k=k.replace("\n", " ")
@@ -149,18 +149,39 @@ def download_snap(time_step):
     return url
 
 #%% load stats from dropbox
-def download_stats(Var):
-    url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AAC3kTv_He2vvYb1cnFIjvGJa/Channel_180/statistics?dl=0'
-    wget.download(url,out='file_stat.txt') 
 
-    start='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/'
-    with open('file_stat.txt','r') as f:
-        s=''.join(f.readlines())  
-        test=re.split(start, s)     
-    os.remove('file_stat.txt')
-    #end=f'/Channel_180/snapshots/Channel-{time_step:010.4f}.pyfrs?dl=0' 
-    end='/Channel_180/statistics/avg-' + Var + '.pyfrs?dl=' 
-    res = [i for i in test if end in i]    
+def download_stats(Var):
+    
+    res='1'
+    m=0
+    while len(res)<2:
+        m+=1
+        #print(m)
+        if m==1 :
+            url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AACe9yvQAWu1a-2-2v34MmlAa/Channel_180/statistics_0?dl=0'
+        elif m==2:
+            url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AACZ0308a6cMPyC1nbbNDKEAa/Channel_180/statistics_1?dl=0'
+        elif m==3:
+            url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AAAj_l4JOjNlQ8PZaWr_4hA1a/Channel_180/statistics_2?dl=0'
+        elif m==4:
+            url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AAB2yDmVph0-B5g03hECN-Yaa/Channel_180/statistics_3?dl=0'
+        elif m==5:
+            url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AAB_IU0QZmH7iCRVWcl_MG3oa/Channel_180/statistics_4?dl=0'
+        elif m==6:
+            url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AAAy0-OU-RMCwKoeSjsoV3Zka/Channel_180/statistics_5?dl=0'
+        elif m==7:
+            url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AACLY5jAsauZIhJGuHrP6cica/Channel_180/statistics_6?dl=0'
+        elif m==7:   
+            url='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/AADKIyYrsWPhqZG3BhYoYhzqa/Channel_180/statistics_7?dl=0'
+        wget.download(url,out='file_stat.txt') 
+        start='https://www.dropbox.com/sh/ak1mxjh6aq8isr0/'
+        with open('file_stat.txt','r') as f:
+            s=''.join(f.readlines())  
+            test=re.split(start, s)     
+        os.remove('file_stat.txt')
+        end=f'/Channel_180/statistics_{m-1}/avg-' + Var + '.pyfrs?dl=' 
+        res = [i for i in test if end in i]  
+    
     loc=str(res[0])  
     loc=loc[:25]  
 
