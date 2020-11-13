@@ -18,8 +18,8 @@ nz=60
 
 
 #pip install boto3
-A = 'AKIAYALVQGAYMYX7ZR7L'
-B = 'tg6fEulFR44KwlC5I89OEy3VrbIOo5QBQCMBxUOA'
+A = 
+B = 
 bucket_name = 'kbwiki-data'
 from boto3.session import Session
 import boto3
