@@ -195,8 +195,9 @@ def Read_solutions(time_step,Mesh=Mesh):
     
     filename = f'Channel-{time_step:010.4f}.pyfrs'
     
-    url=download_snap(time_step)
-    wget.download(url,out=filename)
+    
+    url=f'DNS-1/2/Channel_180/snapshots/Channel-{time_step:010.4f}.pyfrs'
+    bucket.download_file(url,f'Channel-{time_step:010.4f}.pyfrs')
     
     soln = NativeReader(filename)
     cfg=Inifile(soln['stats'])
@@ -234,9 +235,9 @@ def Read_solutions(time_step,Mesh=Mesh):
 
 def Read_stats(vari,Mesh=Mesh):
     
-    url=download_stats(vari) 
     filename='avg-' + vari +'.pyfrs'
-    wget.download(url,out=filename)
+    url=f'DNS-1/2/Channel_180/statistics/avg-' + vari + '.pyfrs' 
+    bucket.download_file(url,f'avg-' + Var + '.pyfrs')
     
     
     nx=62
