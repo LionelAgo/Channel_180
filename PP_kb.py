@@ -18,15 +18,15 @@ nz=60
 
 
 #pip install boto3
-ACCESS_KEY = 'AKIAYALVQGAYMYX7ZR7L'
-SECRET_KEY = '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'
+A = 'AKIAYALVQGAYMYX7ZR7L'
+B = 'tg6fEulFR44KwlC5I89OEy3VrbIOo5QBQCMBxUOA'
 bucket_name = 'kbwiki-data'
 from boto3.session import Session
 import boto3
 
 
-session = Session(aws_access_key_id=ACCESS_KEY,
-              aws_secret_access_key=SECRET_KEY)
+session = Session(aws_access_key_id=A,
+              aws_secret_access_key=B)
 s3 = session.resource('s3')
 bucket = s3.Bucket(bucket_name)
 #%%
